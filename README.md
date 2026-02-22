@@ -4,7 +4,7 @@ Deploy a real-time and historic energy monitoring dashboard using Grafana, Influ
 
 Automatically discovers and logs energy usage statistics from supported TP-Link Kasa and Tapo energy monitoring smart plugs on your local network using [python-kasa](https://github.com/python-kasa/python-kasa).
 
-### Example screenshot:
+### Example screenshot 🖼️
 ![Example dashboard screenshot](assets/dashboard.png)
 
 ### Key functions and features ⚡
@@ -33,19 +33,19 @@ Automatically discovers and logs energy usage statistics from supported TP-Link 
 - Extrapolate hourly and daily running cost estimates from selected time window
 - Monitor seasonal or time-of-day usage patterns
 
-### Requirements🔧
-**Linux host (x86 or ARM)**: Including Raspberry Pi. Windows is not supported; python-kasa requires host networking mode for broadcast discovery, which isn't available under WSL.
+### Requirements 🔧
+- **Linux host (x86 or ARM)**: Including Raspberry Pi. Windows is not supported; python-kasa requires host networking mode for broadcast discovery, which isn't available under WSL.
 
-**Docker Engine:** If not already installed, follow the platform-relevant install instructions here: https://docs.docker.com/engine/install/
+- **Docker Engine:** If not already installed, follow the platform-relevant install instructions here: https://docs.docker.com/engine/install/
 
-**Docker user permissions:** Ensure your user is added to the docker group (log out/in for changes to take effect):
+- **Docker user permissions:** Ensure your user is added to the docker group (log out/in for changes to take effect):
 
     sudo groupadd docker
     sudo usermod -aG docker $USER
 
- **A supported TP-Link smart plug(s):** One or more Kasa HS110 and/or Tapo P110.  Other energy-monitoring models may work but are untested.
+- **A supported TP-Link smart plug(s):** One or more Kasa HS110 and/or Tapo P110.  Other energy-monitoring models may work but are untested.
  
-**Third-Party Compatibility enabled in Tapo app:** In the Tapo app, open the account (“Me”) page, navigate to “Third-Party Services”, and ensure that “Third-Party Compatibility” is enabled.
+- **Third-Party Compatibility enabled in Tapo app:** In the Tapo app, open the account (“Me”) page, navigate to “Third-Party Services”, and ensure that “Third-Party Compatibility” is enabled.
 
 ### Secrets and authentication 🔑
 There are six files under `/secrets` that can be updated; these contain placeholder values only.  These are only required when you run `docker compose` and can be deleted once the container has been fully deployed.  Recreate them should you need to re-deploy the container.
@@ -53,7 +53,7 @@ There are six files under `/secrets` that can be updated; these contain placehol
 InfluxDB's token format is undocumented but appears to accept a [base64](https://base64.guru/learn/base64-characters) string (except using _ and - instead of / and +) up to 88 characters long.  Keep the stock token for testing or update if running long-term.  If you update the token, it must also be updated in `/provisioning/datasources/influxdb.yaml`.
 
 ### Quick start 🚀
-Check the Requirements section and ensure that these are met before proceeding.
+Check the [Requirements](#requirements-) section and ensure that these are met before proceeding.
   
 Clone the repository to your device:
 
@@ -61,7 +61,7 @@ Clone the repository to your device:
 
 Update contents of `/secrets` if you're not deploying for short-term testing only.
 
-Finally, deploy the container:
+Deploy the container:
 
     docker compose up -d
 
@@ -69,7 +69,7 @@ Deployment time varies; should be under 30 seconds with relatively modern hardwa
 
 Once docker compose is finished, wait a few moments for services to start.  Optionally watch for issues via `docker logs -f telemetry-logger`. Initial errors while services are initialising are expected; it will keep retrying until the database exists.
 
-If you did it right, you should be able to browse to Grafana at `http://your.docker.host:3000`  and log in using the credentials previously configured under `/secrets`.  Data should be visible immediately.
+If all went to plan, you should be able to browse to Grafana at `http://your.docker.host:3000`  and log in using the credentials previously configured under `/secrets`.  Data should be visible immediately.
 
 ### Troubleshooting
 Running `docker logs -f telemetry-logger` is your best start - this will give information on database connectivity (especially on first run) as well as device discovery and readings.
