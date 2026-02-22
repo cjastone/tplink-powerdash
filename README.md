@@ -25,7 +25,7 @@ Automatically discovers and logs energy usage statistics from supported TP-Link 
  -  **Set and forget** with new devices appearing automatically and years of data retention, even on limited storage
  -  **Low resource consumption** means you can run it on super constrained hardware such as Raspberry Pi 3
 
-### Power profiling use cases 📈
+### Power profiling examples and use cases 📈
 - Observe and identify specific device power consumption trends over time
 - Understand duty cycles and determine efficient running modes
 - Identify inefficient appliances and quantify standby power usage
@@ -40,9 +40,9 @@ Automatically discovers and logs energy usage statistics from supported TP-Link 
 
 - **Docker user permissions:** Ensure your user is added to the docker group (log out/in for changes to take effect):
 
-    sudo groupadd docker
-    sudo usermod -aG docker $USER
-
+      sudo groupadd docker
+      sudo usermod -aG docker $USER
+  
 - **A supported TP-Link smart plug(s):** One or more Kasa HS110 and/or Tapo P110.  Other energy-monitoring models may work but are untested.
  
 - **Third-Party Compatibility enabled in Tapo app:** In the Tapo app, open the account (“Me”) page, navigate to “Third-Party Services”, and ensure that “Third-Party Compatibility” is enabled.
@@ -71,7 +71,7 @@ Once docker compose is finished, wait a few moments for services to start.  Opti
 
 If all went to plan, you should be able to browse to Grafana at `http://your.docker.host:3000`  and log in using the credentials previously configured under `/secrets`.  Data should be visible immediately.
 
-### Troubleshooting
+### Troubleshooting 🤔
 Running `docker logs -f telemetry-logger` is your best start - this will give information on database connectivity (especially on first run) as well as device discovery and readings.
 
 Database connectivity issues are visible in Grafana under Connections > Datasources > influxdb-v2 > Test.
