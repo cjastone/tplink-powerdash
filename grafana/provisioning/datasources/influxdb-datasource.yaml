@@ -1,0 +1,16 @@
+apiVersion: 1
+
+datasources:
+  - name: influxdb-v2
+    type: influxdb
+    access: proxy
+    url: http://influxdb2:8086
+    jsonData:
+      dbName: power_telemetry_db
+      httpHeaderName1: 'Authorization'
+      product: 'InfluxDB OSS 2.x'
+      version: InfluxQL
+      isDefault: true
+    secureJsonData:
+      # change this value, make sure you keep "Token " in the string
+      httpHeaderValue1: 'Token changemetokenencorrecthorsebatterystaple1234'

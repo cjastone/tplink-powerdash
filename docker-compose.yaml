@@ -1,0 +1,66 @@
+services:
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - '3000:3000'
+    restart: unless-stopped
+    environment:
+      - GF_FEATURE_TOGGLES_ENABLE=newInfluxDSConfigPageDesign   # set the feature flag to enable new influx config options
+      - GF_SECURITY_ADMIN_PASSWORD__FILE=/run/secrets/grafana_admin_password    # set the admin password path env var
+      - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/etc/grafana/provisioning/dashboards/powerdash.json   # set the default dashboard path env var
+    secrets:
+      - grafana_admin_password
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning    # enable mapping to local provisioning folder containing dashboard and datasource yaml
+      - grafana-data:/var/lib/grafana               # enable persistent volume for grafana data
+      
+  influxdb2:
+    image: influxdb:2
+    container_name: influxdb2
+    restart: unless-stopped
+    ports:
+      - "8086:8086"
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup     # trigger automated setup on first run
+      - DOCKER_INFLUXDB_INIT_USERNAME_FILE=/run/secrets/influxdb_admin_username     # set the admin username path env var
+      - DOCKER_INFLUXDB_INIT_PASSWORD_FILE=/run/secrets/influxdb_admin_password     # set the admin password path env var
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN_FILE=/run/secrets/influxdb_token           # set the admin token path env var
+      - DOCKER_INFLUXDB_INIT_ORG=power_telemetry_org           # influx org name (required)
+      - DOCKER_INFLUXDB_INIT_BUCKET=power_telemetry_bucket     # influx bucket name (required)
+    secrets:
+      - influxdb_admin_username
+      - influxdb_admin_password
+      - influxdb_token
+    volumes:
+      - influxdb2-data:/var/lib/influxdb2       # enable persistent volume for influx time series data
+      - influxdb2-config:/etc/influxdb2         # enable persistent volume for influx config data
+      
+  telemetry-logger:
+    build: ./telemetry-logger  # tells docker to build from a local dockerfile
+    container_name: telemetry-logger
+    restart: unless-stopped
+    network_mode: host    # use host networking instead of nat so we can reach plugs on the host network
+    secrets:
+      - tapo_username
+      - tapo_password
+      - influxdb_token
+
+secrets:
+  grafana_admin_password:
+    file: ./secrets/grafana-admin-password.txt
+  influxdb_admin_username:
+    file: ./secrets/influxdb-admin-username.txt
+  influxdb_admin_password:
+    file: ./secrets/influxdb-admin-password.txt
+  influxdb_token:
+    file: ./secrets/influxdb-token.txt
+  tapo_username:
+    file: ./secrets/tapo-username.txt
+  tapo_password:
+    file: ./secrets/tapo-password.txt
+
+volumes:
+  grafana-data:
+  influxdb2-data:
+  influxdb2-config:
