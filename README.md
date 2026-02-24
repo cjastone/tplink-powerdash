@@ -2,7 +2,7 @@
 
 Real-time and long-term energy monitoring dashboard using Grafana, InfluxDB, and Python. Fast and simple deployment using Docker Compose.  Immediate data population and visibility.
 
-Automatic discovery and and energy usage logging for supported TP-Link Tapo and Kasa energy monitoring smart plugs on your local network using [python-kasa](https://github.com/python-kasa/python-kasa).
+Automatic device discovery and and energy usage logging for supported TP-Link Tapo and Kasa energy monitoring smart plugs on your local network using [python-kasa](https://github.com/python-kasa/python-kasa).
 
 ### Example screenshot 🖼️
 ![Example dashboard screenshot](assets/dashboard.png)
