@@ -1,15 +1,15 @@
-# A Dynamic Grafana Dashboard and Energy Monitoring Smart Plug Logger for TP-Link Kasa and Tapo🔌📊
+# An Interactive Grafana Dashboard and Energy Monitoring Smart Plug Logger for TP-Link Tapo and Kasa🔌📊
 
-Deploy a real-time and historic energy monitoring dashboard using Grafana, InfluxDB, and Python using Docker Compose.  Fast and simple deployment with immediate data visibility.
+Real-time and long-term energy monitoring dashboard using Grafana, InfluxDB, and Python. Fast and simple deployment using Docker Compose.  Immediate data population and visibility.
 
-Automatically discovers and logs energy usage statistics from supported TP-Link Kasa and Tapo energy monitoring smart plugs on your local network using [python-kasa](https://github.com/python-kasa/python-kasa).
+Automatic discovery and and energy usage logging for supported TP-Link Tapo and Kasa energy monitoring smart plugs on your local network using [python-kasa](https://github.com/python-kasa/python-kasa).
 
 ### Example screenshot 🖼️
 ![Example dashboard screenshot](assets/dashboard.png)
 
 ### Key functions and features ⚡
  -  **Fully automated deployment** using Docker Compose, real-time statistics visible immediately
- -  **Grafana dashboard** pre-configured with the following real-time and historic metrics:
+ -  **Grafana dashboard** pre-configured with the following real-time and long-term metrics:
 	 -  **Power Usage (W):** 
 		 - Histogram plot
 		 - Numerical readouts for last, highest, lowest, range, mean and total usage
@@ -43,7 +43,7 @@ Automatically discovers and logs energy usage statistics from supported TP-Link 
       sudo groupadd docker
       sudo usermod -aG docker $USER
   
-- **A supported TP-Link smart plug(s):** One or more Kasa HS110 and/or Tapo P110.  Other energy-monitoring models may work but are untested.
+- **Supported TP-Link smart plug(s):** One or more Tapo P110 and/or Kasa HS110.  Other energy-monitoring models may work but are untested.
  
 - **Third-Party Compatibility enabled in Tapo app:** In the Tapo app, open the account (“Me”) page, navigate to “Third-Party Services”, and ensure that “Third-Party Compatibility” is enabled.
 
